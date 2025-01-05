@@ -32,6 +32,10 @@ const userSchema = new Schema({
     type: [String], 
     default: [],
   },
+  friends: {
+    type: [String], 
+    default: [],
+  },
   password: {
     type: String,
     reqired: [true, "Password is required!"],
@@ -61,6 +65,8 @@ userSchema.methods.generateAccessToken = function(){
     username: this.username,
     email: this.email,
     fullname: this.fullname,
+    friends: this.friends,
+    intrests: this.intrests,    
   },
   process.env.ACCESS_TOKEN_SECRET,
   {
@@ -75,6 +81,8 @@ userSchema.methods.generateRefreshToken = function(){
     username: this.username,
     email: this.email,
     fullname: this.fullname,
+    friends: this.friends,
+    intrests: this.intrests,
   },
   process.env.REFRESH_TOKEN_SECRET,
   {

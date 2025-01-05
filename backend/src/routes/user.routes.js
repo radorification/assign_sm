@@ -1,7 +1,7 @@
 import { Router } from 'express';
-import registerUser from '../controller/user.controller.js';
+import {registerUser, loginUser, getUser, getUserFriends, addRemoveFriend} from '../controller/user.controller.js';
 import { upload } from "../middleware/multer.js";
-//import { verifyJWT } from "../middlewares/auth.middleware.js";
+import { verifyJWT } from "../middleware/auth.middleware.js";
 
 
 const router = Router();
@@ -15,8 +15,15 @@ router.route("/register").post(
   registerUser
 );
 
+router.route("/login").post(loginUser)
+/* READ */
+router.get("/:id", verifyJWT, getUser);
+router.get("/:id/friends",  getUserFriends);
+
+/* UPDATE */
+router.patch("/:id/:friendId",  addRemoveFriend);
 
 
-router.route('/register').post(registerUser);
+
 
 export default router;
