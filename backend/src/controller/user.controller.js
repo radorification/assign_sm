@@ -1,5 +1,8 @@
 import {asyncHandler} from "../utils/asyncHandler.js"
-//import
+import { User } from "../models/user.model.js";
+import { uploadOnCloudinary } from "../utils/cloudinary.js";
+import { ApiError } from "../utils/ApiError.js";
+import { ApiResponse } from "../utils/ApiResponse.js";
 
 const registerUser = asyncHandler(async(req, res)=>{
 
@@ -41,7 +44,8 @@ const registerUser = asyncHandler(async(req, res)=>{
 		username,
 		avatar: avatar?.url || "",
 		email,
-        intrests,
+        // intrests (only if the user has given any)
+        intrests: req.body.intrests || [],
 		password,
 		fullname
 	})
